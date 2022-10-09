@@ -105,7 +105,7 @@ ax.view_init(elev=70., azim=40)
 ax.legend(['Obstacles', 'Targets', 'Agents'])
 
 
-################################## Drone Simulation Function ####################################################
+#%% ################################# Drone Simulation Function ####################################################
 
 def droneSim(nM, nO, nT, w1, w2, w3, LAM, dt, tf, posM, velM, posTar, posObs):
     """
@@ -355,6 +355,7 @@ def myGA(S, G, P, K, minLam, maxLam, numLam, Nm, No, Nt, w1, w2, w3, dt, tf, pos
 
     # Initially, calculate cost for all strings. After, only calculate new strings since top P already calculated
     start = 0
+    print(S)
 
     for i in range(G):  # Loop through generations
 
@@ -382,7 +383,10 @@ def myGA(S, G, P, K, minLam, maxLam, numLam, Nm, No, Nt, w1, w2, w3, dt, tf, pos
         Lam = np.hstack((Lam[:, 0:P], phi[:, ind1] * Lam[:, ind1] + (1 - phi[:, ind1]) * Lam[:, ind2],
                          phi[:, ind2] * Lam[:, ind2] + (1 - phi[:, ind2]) * Lam[:, ind1],
                          (maxLam - minLam) * np.random.rand(numLam, S - P - K) + minLam))
-
+        
+        # print(Lam.shape)
+        # print(Lam)
+        
         # Save all requested values
         Min[i] = Pi[0]
         PAve[i] = np.mean(Pi[0:P])
